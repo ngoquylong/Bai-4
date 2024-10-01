@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Đăng Nhập</title>
+</head>
+<body>
+    <form id="loginForm" onsubmit="return validateForm()">
+        <label for="email">Email đăng nhập:</label>
+        <input type="text" id="email" name="email" placeholder="Vui lòng nhập email">
+        <br><br>
+        
+        <label for="password">Mật khẩu:</label>
+        <input type="password" id="password" name="password" placeholder="Vui lòng nhập mật khẩu">
+        <button type="button" onclick="togglePassword()">Ẩn/Hiện</button>
+        <br><br>
+        
+        <input type="submit" value="Đăng nhập">
+    </form>
+
+    <script>
+        // Hàm ẩn/hiện mật khẩu
+        function togglePassword() {
+            var passwordInput = document.getElementById("password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
+        }
+
+        // Hàm kiểm tra định dạng email
+        function validateEmail(email) {
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailPattern.test(email);
+        }
+
+        // Hàm validate form
+        function validateForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // Kiểm tra định dạng email
+            if (!validateEmail(email)) {
+                alert("Vui lòng nhập đúng định dạng email.");
+                return false;
+            }
+
+            // Kiểm tra mật khẩu khác rỗng
+            if (password === "") {
+                alert("Mật khẩu không được để trống.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
